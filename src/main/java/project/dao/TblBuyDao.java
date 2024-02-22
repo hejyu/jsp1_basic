@@ -25,7 +25,15 @@ public class TblBuyDao {
     public static final String PASSWORD = "1234";
 
     private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+    	Connection conn = null;
+    	try {
+			Class.forName(DRIVER);
+			conn = DriverManager.getConnection(URL,USERNAME, PASSWORD);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+    	
+        return conn;
     }
 
     // executeUpdate 메소드는 insert, update, delete 가 정상 실행(반영된 로우 있으면)되고 나면 1을 리턴하고,
@@ -201,7 +209,7 @@ public class TblBuyDao {
 
     public List<BuyVO> selectBuyList(String customId) {
         List<BuyVO> list = new ArrayList<>();
-        String sql = "SELECT buy_idx, pcode, quantity   FROM tbl_buy WHERE CUSTOMID = ?";
+        String sql = "SELECT pcode, quantity FROM tbl_buy WHERE CUSTOMID = ?";
 
         try (
             Connection conn = getConnection();
@@ -247,6 +255,25 @@ public class TblBuyDao {
         return money;
     }
     
+    public List<BuyVO> allBuyInfo() {
+    	List<BuyVO> list = new ArrayList<>();
+    	String sql = "SELECT buy_idx, customid, pcode, quantity, buy_date FROM tbl_buy";
+    	
+    	try (
+    		Connection conn = getConnection();
+    		PreparedStatement ps = conn.prepareStatement(sql); 	
+    	) {
+    		ResultSet rs =  ps.executeQuery();
+    		while(rs.next()) {
+    			list.add(new BuyVO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4),rs.getTimestamp(5)));
+    		}
+    		
+    	} catch (SQLException e) {
+    		System.out.println("allBuyInfo 실행 예외 : " + e.getMessage());
+    	}
+    	
+    	return list;
+    }
 }
 
 /**

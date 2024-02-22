@@ -121,6 +121,27 @@ public class TblProductDao {
         return map;
     }
 
+    
+    public List<ProductVO> allProducts() {
+    	List<ProductVO> list = new ArrayList<>();
+    	String sql = "SELECT pcode, category, pname, price FROM tbl_product";
+    	
+    	try(
+    		Connection conn = getConnection();
+    		PreparedStatement ps = conn.prepareStatement(sql);
+    	) {
+    		ResultSet rs = ps.executeQuery();
+    		
+    		while(rs.next()) {
+    			list.add(new ProductVO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
+    		}
+    		
+    	} catch (Exception e) {
+    		System.out.println("allProducts 예외 발생" + e.getMessage());
+		}
+    	
+    	return list;
+    }
 
 
 

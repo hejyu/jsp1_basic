@@ -1,23 +1,36 @@
 package project.vo;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 
 /**
  * tbl_buy 테이블의 필드와 1:1 매칭하는 변수로 정의합니다
  */
+
+
 public class BuyVO {
 
     public int buy_idx;
     public String customId;
     public String pcode;
     public int quantity;
-    public Date buy_date;
+    public Timestamp buy_date;
+    
 
     public BuyVO(String customId, String pcode, int quantity) {
-        this.customId = customId;
+    	this.customId = customId;
         this.pcode = pcode;
         this.quantity = quantity;
+    }
+    
+
+    public BuyVO(int buy_idx, String customId, String pcode, int quantity, Timestamp buy_date ) {
+        this.buy_idx = buy_idx;
+    	this.customId = customId;
+        this.pcode = pcode;
+        this.quantity = quantity;
+        this.buy_date = buy_date;
     }
 
     public int getBuy_idx() {
@@ -56,7 +69,7 @@ public class BuyVO {
         this.quantity = quantity;
     }
 
-    public void setBuy_date(Date buy_date) {
+    public void setBuy_date(Timestamp buy_date) {
         this.buy_date = buy_date;
     }
     
