@@ -29,7 +29,7 @@
 	<h5>name : <c:out value="${name }"/></h5> <!--name은 자바변수. 출력안됨.  -->
 	<!-- 3. 자바의 if문을 대체하는 태그 입니다. -->
 	<h5>c:if 테스트</h5>
-	<!-- 조건식을 test 속성에 작성. EL 기호 ${} 안에 씁니다. -->
+	<!-- 조건식을 test 속성에 작성. EL 기호 안에 씁니다. -->
 	<c:if test="${age <20 }">
 		<div style="color:green">청소년 입니다.</div>
 	</c:if>

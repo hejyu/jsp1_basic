@@ -14,7 +14,7 @@ c
 <body>
 
 	<h3>TBL_고객 테이블 데이터 조회/저장 서블릿 테스트(day3)</h3>
-	
+	<h4>GET 방식 요청 : 파라미터 값을 utf-8 인코딩 합니다</h4>
 	<ul>
 		<li><a href="customers.cc">고객 전체 조회</a></li>
 		<li><a href="products.cc">상품 전체 조회</a></li>
@@ -22,11 +22,20 @@ c
 		
 		
 	</ul>
-	
+	<h4>POST 방식 요청</h4>
+	<p>POST 방식 요청은 form을 이용해서 동작합니다. Get은 파라미터를 url과 함께 전달하지만 
+		POST 는 HTTP 프로토콜 메시지 body에 저장ㅇ하여 요청을 보냅니다.
+		POST 는 서버 데이터의 추가/ 수정/ 삭제 와 같은 변경 작업에 주로 사용됩니다.
+		POST 는 파라미터 값 인코딩 해주지 않습니다.
+	</p>
+	<h5>고객 등록 화면, 고객 등록 입력값 저장(POST) 2개의 작업 필요
+	<!--  방법1) 1개의 서블릿에서 doGet, doPost를 구현
+			 2) 2개 작업에 각각 서블릿 만들기
+	-->
+	 </h5>
 	<ul>
-		<li>
-			<a href="register.cc">고객 등록</a>
-		</li>
+		<li><a href="register.cc">고객 등록</a></li>
+		<li><a href="productReg.cc">상품 등록</a></li>
 	</ul>
 
 	<!-- <ul>

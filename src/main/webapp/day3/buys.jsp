@@ -20,7 +20,7 @@
 	<!--  list 이름의 애트리뷰트를 대상으로 합니다. : 애트리뷰트 저장은 서블릿에서 합니다  -->
 	<c:forEach items="${list}" var="vo" varStatus="status">
 		<li>
-			<ul>
+			<ul class="row">
 				<li><c:out value="${status.index + 1}" /></li>
 			   	<li><c:out value="${vo.buy_idx}" /></li>
 			   	<li><c:out value="${fn:toUpperCase(vo.customId)}" /></li>

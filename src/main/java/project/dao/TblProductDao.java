@@ -24,7 +24,15 @@ public class TblProductDao {
     public static final String PASSWORD = "1234";
 
     private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+    	Connection conn = null;
+    	try {
+			Class.forName(DRIVER);
+			conn = DriverManager.getConnection(URL,USERNAME, PASSWORD);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+    	
+        return conn;
     }
 
 
@@ -143,6 +151,29 @@ public class TblProductDao {
     	return list;
     }
 
+    
+    public int registerProduct(ProductVO vo) {
+    	String sql = "insert into tbl_product(pcode, category, pname, price) "+
+    				"values(?,?,?,?)";
+    
+    	int result = 0;
+    	try( Connection conn = getConnection();
+    		 PreparedStatement ps = conn.prepareStatement(sql);
+    	) {
+    		ps.setString(1, vo.getPcode());
+    		ps.setString(2, vo.getCategory());
+    		ps.setString(3, vo.getPname());
+    		ps.setInt(4, vo.getPrice());
+    		
+    		result = ps.executeUpdate();
+    		
+    		System.out.println("registerProduct 실행");
+    	} catch(Exception e) {
+    		System.out.println("registerProduct 예외 발생" + e.getMessage());
+		}
+    	
+    	return result;
+    }
 
 
 }

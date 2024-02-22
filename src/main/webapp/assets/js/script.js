@@ -1,9 +1,10 @@
 // 작성자 : 조하연
 
 document.getElementById('join').addEventListener('click', function() {
-    if(fn_form_valid()) {
+    /*if(fn_form_valid()) {
         document.forms[0].submit()
-    }
+    }*/
+     document.forms[0].submit()
 })
 
 
