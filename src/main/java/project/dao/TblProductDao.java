@@ -152,6 +152,11 @@ public class TblProductDao {
     }
 
     
+    /**
+     * 상품 등록-저장
+     * @param vo
+     * @return int
+     */
     public int registerProduct(ProductVO vo) {
     	String sql = "insert into tbl_product(pcode, category, pname, price) "+
     				"values(?,?,?,?)";
@@ -166,6 +171,7 @@ public class TblProductDao {
     		ps.setInt(4, vo.getPrice());
     		
     		result = ps.executeUpdate();
+
     		
     		System.out.println("registerProduct 실행");
     	} catch(Exception e) {

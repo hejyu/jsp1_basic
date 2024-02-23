@@ -1,6 +1,7 @@
 package servlet.day3;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,7 +24,7 @@ public class ProductRegister extends HttpServlet{
 	private static final Logger logger = LoggerFactory.getLogger(CustomerServlet.class);
 
 	
-	// 화면을 보여주는 서블릿이므로 GET 
+	// 화면을 보여주는 서블릿 GET 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -56,9 +57,21 @@ public class ProductRegister extends HttpServlet{
 		ProductVO vo = new ProductVO(pcode, category, pname, price);
 		
 		TblProductDao dao = new TblProductDao();
-		dao.registerProduct(vo);
+		int result = dao.registerProduct(vo);
+
+		String message = "상품 등록이 완료되었습니다.";
+		if(result == 0)
+			message = "상품 등록 오륙가 생겼습니다.";
 		
-		response.sendRedirect("products.cc");
+		// response.sendRedirect("products.cc");  // sendRedirect 대신에 alert 출력
+		
+		response.setContentType("text/html; charset=UTF-8");	// 보내는 response에 인코딩을 설정해줍니다.
+		PrintWriter out = response.getWriter();
+		out.print("<script>");
+		out.print("alert('"+message+"')");
+		out.print("location.href='product.cc';");
+		out.print("</script>");
+		
 		
 		
 		

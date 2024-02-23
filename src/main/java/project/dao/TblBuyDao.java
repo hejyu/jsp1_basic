@@ -19,7 +19,9 @@ import project.vo.CustomBuyVO;
  * insert, update, delete
  */
 public class TblBuyDao {
-    public static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
+    
+	/* 데이터베이스 Connection Pool */
+	public static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
     public static final String URL ="jdbc:oracle:thin:@//localhost:1521/xe";
     public static final String USERNAME ="c##idev";
     public static final String PASSWORD = "1234";
