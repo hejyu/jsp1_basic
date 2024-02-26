@@ -36,9 +36,9 @@ public class MybatisBuyDao {
 		return list;
 	}
 	
-	public List<BuyVO> selectBuyByCustomid(String customid) {
+	public List<BuyDto> selectBuyByCustomid(String customid) {
 		SqlSession sqlSession = sessionFactory.openSession();
-		List<BuyVO> list = sqlSession.selectList("tblbuy.selectBuyByCustomid",customid);
+		List<BuyDto> list = sqlSession.selectList("tblbuy.selectBuyByCustomid",customid);
 		sqlSession.close();
 		return list;
 	}

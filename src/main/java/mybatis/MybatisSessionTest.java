@@ -56,7 +56,7 @@ public class MybatisSessionTest {
 		System.out.println(list);
 		
 		System.out.println("==== selectBuyByCustomid 테스트 ====");
-		List<BuyVO> list2 = dao.selectBuyByCustomid(customid);
+		List<BuyDto> list2 = dao.selectBuyByCustomid(customid);
 		System.out.println(list2);
 		
 		

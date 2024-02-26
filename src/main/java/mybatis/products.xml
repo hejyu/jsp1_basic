@@ -5,51 +5,82 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="tblproduct">
- 	<!-- SQL 매퍼, 실행할 SQL 만 모아놓은 파일 
- 		1) DML INSERT, UPDATE, DELETE, SELECT 와 동일한 태그에 작성하기
- 		2) DAO 메소드에서 지정했던 메소드의 인자, 리턴타입 정하기
- 			주의 : 자바 객체의 변수(속성)명과 파라미터 이름을 동일하게 해야합니다
- 				파라미터가 Map 일 때는 key 이름과 파라미터 이름을 동일하게 합니다.
- 				기본 형식, String 은 변수 선언 키워드와 동일하게 합니다.
- 		3) dto(또는 vo) 클래스는 커스텀 생성자를 사용하고, 컬럼명과 변수명 순서를 같게 합니다.
- 		4) namespace, id 속성값은 개발자가 정합니다
+ 	<!-- 동적쿼리 : 상품 조회에 검색 필터 적용. 4가지 경우 중 하나의 쿼리가 실행되게 할 수 있습니다
+ 		 - 마이바티스 동적쿼리에 사용되는 태그
+ 		 	: where, if, trim 
+ 		 결과 쿼리 예시:
+ 		 select * from tbl_product where category = 'B2' and pname like '%' || '사과' || '%'
  	 -->
- 	<select id="selectAll" resultType="BuyDto">
- 		SELECT buy_idx, customid, pcode, quantity, buy_date FROM tbl_buy ORDER BY buy_date desc
+ 	<select id="search" resultType="ProductDto" parameterType="java.util.Map">
+ 		select pcode, category, pname, price from tbl_product
+ 		<where>
+ 			<!--  if 태그 test 속성 값은 조건식을 작성합니다.
+ 				  parameter 인 keyword 의 값이 있는 경우를 체크합니다
+ 			 --> 
+ 			<if test="keyword!=null">
+ 				pname like '%' || #{keyword} || '%'
+ 			</if>
+ 			
+ 			<if test="category!=null">
+ 				<!-- 앞에 조건식이(prefix) 없는 경우 and를 제거(trim)하고
+ 					앞에 조건식이 있는 경우만 and를 붙인다
+ 				 -->
+ 				<trim prefix ="and">
+ 					category = #{category}
+ 				</trim>
+ 			</if>
+ 			
+ 			<!-- 논리연산자 and or -->
+ 			<if test="from!=null and to!=null">
+ 				<trim prefix ="and">
+ 					price between #{from} and #{to}
+ 				</trim>
+ 			</if>
+ 		</where>
+ 		<if test="column!=null">
+ 		<!-- #{} : ""안에 들어가는 값이라고 생각하면 됨
+ 			 ${} : 자바로 전달한 값 그대로 들어간다고 생각하면 됨 (""없이)
+ 		 -->
+ 		order by ${column}
+ 		</if>
+ 	</select>
+ 	 
+ 	<select id="selectAll" resultType="ProductDto">
+ 		SELECT pcode, category, pname, price
+		FROM TBL_PRODUCT tp 
+		ORDER BY pcode
   	</select>
- 	
+  	
+  	<select id="selectByPname" parameterType="String" resultType="ProductDto">
+ 		SELECT pcode, category, pname, price
+		FROM TBL_PRODUCT  
+		WHERE pname LIKE '%' || #{pname} || '%' 
+  	</select>
+
+  	<select id="selectByCategory" parameterType="String" resultType="ProductDto">
+ 		SELECT pcode, category, pname, price
+		FROM TBL_PRODUCT  
+		WHERE category LIKE '%' || #{category} || '%' 
+		order by pname
+  	</select>
+  	
  	<!-- insert, update, delete 는 리턴타입 지정안합니다(그래도 값은 리턴해줍니다) -->
- 	<insert id="insert" parameterType="BuyDto">
- 		insert into tbl_buy
- 			values(buy_pk_seq.nextval, #{customid}, #{pcode}, #{quantity}, sysdate)
+ 	<insert id="insert" parameterType="ProductDto">
+ 		insert into tbl_product(pcode, category, pname, price)
+    							values(#{pcode}, #{category}, #{pname}, #{price})
  	</insert>
  	
  	<update id="update" parameterType="java.util.Map">
- 		update tbl_buy
- 			set quantity = #{quantity}
- 			where buy_idx = #{buy_idx}
+ 		update tbl_product
+ 			set pname = #{pname}
+ 			where pcode = #{pcode}
  	</update>
  	
- 	<delete id="delete" parameterType="int">
- 		delete from tbl_buy
- 			where buy_idx = #{buy_idx}
+ 	<delete id="delete" parameterType="String">
+ 		delete tbl_product where pcode = #{pcode}
  	</delete>
  	
- 	<select id="selectBuyMyPage" parameterType="String" resultType="CustomerBuyDto">
- 			SELECT buy_idx, tb.pcode, pname, price, quantity, buy_date
-            FROM TBL_BUY tb
-            	JOIN TBL_PRODUCT tp
-                ON tb.PCODE  = tp.PCODE 
-            WHERE tb.CUSTOMID = #{customid}
-            ORDER BY BUY_DATE desc
- 	</select>
- 	
- 	<select id="selectBuyByCustomid" parameterType="String" resultType="BuyVO">
- 			SELECT pcode, quantity 
- 			FROM tbl_buy 
- 			WHERE CUSTOMID = #{customid}
- 	</select>
- 	
+
  	
  </mapper>
  
