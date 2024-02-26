@@ -5,14 +5,20 @@
 <title>JSP1-INDEX</title>
 </head>
 
-
-c
 <!-- html 에서 url 지정하는 href 속성값은 / 로 시작하면 /jsp1 (Context Path) 사라집니다. 
 	 href = "/customer.cc" 일 때는  http://localhost:8088/customers.cc
 -->
 
 <body>
 
+	<h3>상품 검색</h3>
+	<ul>
+		<li><a href="search-product.cc">상품 검색</a></li>
+		<li>마이바티스 동적 검색필터 쿼리로 구현</li>
+		<li>검색 값 전달하는 서블릿 구현</li>
+	</ul>
+
+<hr>
 	<h3>TBL_고객 테이블 데이터 조회/저장 서블릿 테스트(day3)</h3>
 	<h4>GET 방식 요청 : 파라미터 값을 utf-8 인코딩 합니다</h4>
 	<ul>

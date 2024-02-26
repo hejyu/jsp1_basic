@@ -17,3 +17,14 @@ ul .row > li {
 .row > li:nth-child(3) { width : 10rem; }
 
 
+select,input {
+   padding: 0.5rem  0.02rem;
+   width : 12rem;
+}
+button {
+   padding: 0.4rem  0.02rem;
+   width : 8rem; 
+}
+.search {
+   padding: 0.5rem  0.02rem;
+}

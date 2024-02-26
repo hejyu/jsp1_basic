@@ -5,9 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 등록</title>
-<!-- JSP 파일을 실행할 때는 아래와 같이 CSS 를 적용합니다 -->
-<!-- <link rel="stylesheet"    href="../assets/css/register.css" > -->
-<!-- Servlet 으로 실행될 때는 아래와 같이 적용합니다 -->
+<!-- 
+	JSP 파일을 실행할 때는 아래와 같이 CSS 를 적용합니다
+ 	<link rel="stylesheet"    href="../assets/css/register.css" >
+	Servlet 으로 실행될 때는 아래와 같이 적용합니다 
+
+-->
 <link rel="stylesheet"    href="assets/css/register.css" > 
 </head>
 <body>

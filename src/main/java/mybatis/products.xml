@@ -12,7 +12,11 @@
  		 select * from tbl_product where category = 'B2' and pname like '%' || '사과' || '%'
  	 -->
  	<select id="search" resultType="ProductDto" parameterType="java.util.Map">
- 		select pcode, category, pname, price from tbl_product
+ 		select 	pcode, 
+ 				category, 
+ 				pname, 
+ 				price
+ 		from tbl_product
  		<where>
  			<!--  if 태그 test 속성 값은 조건식을 작성합니다.
  				  parameter 인 keyword 의 값이 있는 경우를 체크합니다
@@ -23,8 +27,8 @@
  			
  			<if test="category!=null">
  				<!-- 앞에 조건식이(prefix) 없는 경우 and를 제거(trim)하고
- 					앞에 조건식이 있는 경우만 and를 붙인다
- 				 -->
+ 					앞에 조건식이 있는 경우만 and를 붙인다  -->
+ 				
  				<trim prefix ="and">
  					category = #{category}
  				</trim>
@@ -43,6 +47,12 @@
  		 -->
  		order by ${column}
  		</if>
+ 	</select>
+ 	
+ 	<select id="getCategories" resultType="day4.mybatis.dto.CateDto">
+ 		<!-- SELECT distinct category FROM TBL_PRODUCT
+ 		order by category -->
+ 		select code, name from tbl_category order by code
  	</select>
  	 
  	<select id="selectAll" resultType="ProductDto">

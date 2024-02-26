@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import day4.mybatis.dto.CateDto;
 import day4.mybatis.dto.ProductDto;
 import mybatis.SqlSessionBean;
 
@@ -16,7 +17,7 @@ public class MybatisProductDao {
 	public MybatisProductDao() {
 		// TEST DB connection : will remove
 		SqlSession sqlSession = sessionFactory.openSession();
-		System.out.println("db 연결 및 실행 객체 : " + sqlSession);
+		System.out.println("db 연결 및 실행 객체 : " + sqlSession.getClass());
 	}
 	
 	public List<ProductDto> selectAll() {
@@ -75,7 +76,12 @@ public class MybatisProductDao {
 	}
 	
 	
-	
+	public List<CateDto> getCategories() {
+		SqlSession sqlSession = sessionFactory.openSession();
+		List<CateDto> list = sqlSession.selectList("tblproduct.getCategories");
+		sqlSession.close();
+		return list;
+	}
 	
 	
 	

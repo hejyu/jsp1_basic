@@ -18,7 +18,6 @@ public class ProductDto {
     public String pname;
     public int price;
     
-    
     @Override
     public String toString() {
         return String.format("\n%6s %15s %40s\t %,8d", 

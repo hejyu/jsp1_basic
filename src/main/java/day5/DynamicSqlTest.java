@@ -10,7 +10,7 @@ import day4.mybatis.dto.ProductDto;
 public class DynamicSqlTest {
 
 	public static void main(String[] args) {
-		testOrderBy();
+		testAllFilter();
 	}
 	
 	
@@ -66,10 +66,10 @@ public class DynamicSqlTest {
 	public static void testAllFilter() {
 		MybatisProductDao dao = new MybatisProductDao();
 		Map<String, Object> map = new HashMap<>();
-		map.put("keyword", "애플망고");		// key : 파라미터이름, value : 검색어
+		map.put("keyword", "");		// key : 파라미터이름, value : 검색어
 		map.put("category", "A2");		// key : 파라미터이름, value : 검색어
-		map.put("from", 10000);		// key : 파라미터이름, value : 검색어
-		map.put("to", 40000);		// key : 파라미터이름, value : 검색어
+		map.put("from", "");		// key : 파라미터이름, value : 검색어
+		map.put("to", "");		// key : 파라미터이름, value : 검색어
 		
 		List<ProductDto> list = dao.search(map);
 	
