@@ -72,7 +72,7 @@ public class DynamicSqlTest {
 		map.put("to", "");		// key : 파라미터이름, value : 검색어
 		
 		List<ProductDto> list = dao.search(map);
-	
+		//
 		System.out.println("검색 필터 - 카데고리 & 상품명 그리고 가격 : " + list); 
 	}
 	
