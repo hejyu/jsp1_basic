@@ -19,7 +19,7 @@ import day4.mybatis.dao.MybatisProductDao;
 import day4.mybatis.dto.CateDto;
 import day4.mybatis.dto.ProductDto;
 
-@WebServlet(urlPatterns = {"/search-product.cc"}, description = "상품 검색")
+@WebServlet(urlPatterns = {"/day5/search-product.cc"}, description = "상품 검색")
 public class ProductSearchServlet extends HttpServlet{
 
 	
@@ -67,7 +67,9 @@ public class ProductSearchServlet extends HttpServlet{
 		req.setAttribute("list", list);
 		req.setAttribute("cateList", cateList);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/day5/search.jsp");
+		
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("search.jsp");
 		dispatcher.forward(req, res);
 	}
 	

@@ -8,9 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <title>JSP1-상품검색필터조회</title>
-<link rel="stylesheet" href="assets/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/common.css">
 </head>
 <body>
+
 	<h3>상품 전체 조회 - day3 product.jsp 에 검색기능 추가</h3>
 	<hr>
 	<div class="search">
