@@ -30,7 +30,7 @@ public class ProductServlet extends HttpServlet {
 		TblProductDao dao = new TblProductDao();
 		List<ProductVO> list = dao.allProducts();
 		
-		logger.info("[ProductServlet] 상품 전체 목로 조회 {}" , list);
+		logger.info("[ProductServlet] 상품 전체 목록 조회 {}" , list);
 		
 		// jsp 뷰에 보낼 애트리뷰트 값을 저장합니다
 		req.setAttribute("list", list);

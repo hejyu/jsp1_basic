@@ -20,7 +20,7 @@
 		-->
 		<form id="search_form">
 			<select name="category" id="category">
-				<option value="">카데고리 선택</optoin>
+				<option value="">카데고리 선택</option>
 				<c:forEach items="${cateList}" var="cate">
 					<option value="${cate.code}"><c:out value="${cate.name}" /> </option>
 				</c:forEach>
