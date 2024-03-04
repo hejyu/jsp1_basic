@@ -7,7 +7,6 @@ import day4.mybatis.dao.MybatisCustomerDao;
 import day4.mybatis.dao.MybatisProductDao;
 import day4.mybatis.dto.BuyDto;
 import day4.mybatis.dto.CustomerBuyDto;
-import project.vo.BuyVO;
 
 public class MybatisSessionTest {
 

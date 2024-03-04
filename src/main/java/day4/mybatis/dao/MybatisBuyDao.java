@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import day4.mybatis.dto.BuyDto;
 import day4.mybatis.dto.CustomerBuyDto;
 import mybatis.SqlSessionBean;
-import project.vo.BuyVO;
 
 
 public class MybatisBuyDao {
